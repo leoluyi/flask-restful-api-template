@@ -1,0 +1,10 @@
+Flask
+Flask-Migrate
+Flask-RESTful
+Flask-Script
+Flask-SQLAlchemy
+python-dotenv
+werkzeug
+
+# Application server for both development and production.
+gunicorn

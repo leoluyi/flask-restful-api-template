@@ -1,7 +1,7 @@
-from .model import Todo
+from .models import Todo
+from myapp.extensions import db
 from flask_restful import fields, marshal_with, marshal
 from flask_restful import Resource, reqparse, request
-from myapp.app import db
 
 todo_fields = {
     'id': fields.Integer,

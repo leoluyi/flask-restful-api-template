@@ -1,15 +1,16 @@
 from .endpoints.users.resource import UsersResource
 from .endpoints.todos.resource import TodosResource
+from .extensions import (
+    api,
+    db,
+)
 from dotenv import load_dotenv
 from flask import Flask, jsonify
-from flask_restful import Resource, Api
-from flask_sqlalchemy import SQLAlchemy
+from flask_restful import Resource
 from werkzeug.exceptions import default_exceptions
 from werkzeug.exceptions import HTTPException
 import os
 load_dotenv()
-
-db = SQLAlchemy()  # done here so that db is importable
 
 
 class Student(Resource):
@@ -44,14 +45,28 @@ def create_app(settings_override=None):
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
     app.config['BUNDLE_ERRORS'] = os.getenv('BUNDLE_ERRORS')
+    app.config['DEBUG'] = True
+    extensions(app)
 
+    return app
+
+
+def extensions(app):
+    """
+    Register 0 or more extensions (mutates the app passed in).
+
+    :param app: Flask application instance
+    :return: None
+    """
+
+    # DB
     db.init_app(app)
-    api = Api(app)
-    api.prefix = '/api'
 
-    # Register the endpoints
+    # API
+    api.prefix = '/api'
     api.add_resource(Student, '/student/<string:name>')
     api.add_resource(UsersResource, '/users', '/users/<int:user_id>')
     api.add_resource(TodosResource, '/todos', '/todos/<int:todo_id>')
+    api.init_app(app)
 
-    return app
+    return None

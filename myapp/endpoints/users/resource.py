@@ -1,5 +1,4 @@
-from .models import User
-from myapp.extensions import db
+from .models import User, db
 from flask_restful import fields, marshal_with, marshal
 from flask_restful import Resource, reqparse, request
 
@@ -51,6 +50,7 @@ class UsersResource(Resource):
     @marshal_with(user_fields)
     def post(self):
         args = user_post_parser.parse_args()
+        print(args)
 
         user = User(**args)
         db.session.add(user)

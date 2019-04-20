@@ -6,9 +6,10 @@
 2. Run following commands for db migration:
 
     ```bash
-    $ python manage.py db init
-    $ python manage.py db migrate
-    $ python manage.py db upgrade
+    $ export FLASK_APP="myapp.flasky"
+    $ flask db init
+    $ flask db migrate
+    $ flask db upgrade
     ```
 
 3. Start server by running `./init.sh`
@@ -54,8 +55,38 @@
 └── requirements.txt
 ```
 
+## API Document
+
+POST http://127.0.0.1:5000/api/users
+
+Content
+
+```
+{
+    "name": "John John"
+}
+```
+
+PUT http://127.0.0.1:5000/api/users/1
+
+```
+{
+    "name": "Smith Smith"
+}
+```
+
+DELETE http://127.0.0.1:5000/api/users/1
+
+GET http://127.0.0.1:5000/api/users
+
+GET http://127.0.0.1:5000/api/users/2
+
+GET http://127.0.0.1:5000/api/users?name=John%20John
+
+GET http://127.0.0.1:5000/api/users?limit=1&offset=1
+
 ## References
 
 - https://youtu.be/rHA5h9Gu7WI
 - https://github.com/tomasrasymas/flask-restful-api-template
-
+- [Migrating from Flask-Script to the New Flask CLI](https://blog.miguelgrinberg.com/post/migrating-from-flask-script-to-the-new-flask-cli)

@@ -1,5 +1,4 @@
-from .models import Todo
-from myapp.extensions import db
+from .models import Todo, db
 from flask_restful import fields, marshal_with, marshal
 from flask_restful import Resource, reqparse, request
 

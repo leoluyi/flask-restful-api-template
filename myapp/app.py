@@ -10,6 +10,7 @@ from flask_restful import Resource
 from werkzeug.exceptions import default_exceptions
 from werkzeug.exceptions import HTTPException
 import os
+from pathlib import Path
 load_dotenv()
 
 
@@ -42,7 +43,10 @@ def create_app(settings_override=None):
     for ex in default_exceptions:
         app.register_error_handler(ex, handle_error)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = Path(os.getenv('SQLALCHEMY_DATABASE_URI')).expanduser().resolve().as_posix()
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{SQLALCHEMY_DATABASE_URI}'
+    print(SQLALCHEMY_DATABASE_URI)
+    app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
     app.config['BUNDLE_ERRORS'] = os.getenv('BUNDLE_ERRORS')
     app.config['DEBUG'] = True

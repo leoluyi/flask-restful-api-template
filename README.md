@@ -87,6 +87,6 @@ GET http://127.0.0.1:5000/api/users?limit=1&offset=1
 
 ## References
 
-- https://youtu.be/rHA5h9Gu7WI
+- [REST APIs with Flask and Python](https://youtu.be/rHA5h9Gu7WI)
 - https://github.com/tomasrasymas/flask-restful-api-template
 - [Migrating from Flask-Script to the New Flask CLI](https://blog.miguelgrinberg.com/post/migrating-from-flask-script-to-the-new-flask-cli)

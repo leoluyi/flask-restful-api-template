@@ -4,21 +4,17 @@ from .extensions import (
     api,
     db,
 )
-from dotenv import load_dotenv
 from flask import Flask, jsonify
 from flask_restful import Resource
-from werkzeug.exceptions import default_exceptions
-from werkzeug.exceptions import HTTPException
-import os
-from pathlib import Path
-load_dotenv()
+from werkzeug.exceptions import default_exceptions, HTTPException
+from werkzeug.debug import DebuggedApplication
 
 
 class Student(Resource):
     """docstring for Student"""
 
     def get(self, name):
-        return jsonify({'student': name})
+        return jsonify({'student': name, 'test': 1 / 0})
 
 
 def create_app(settings_override=None):
@@ -29,28 +25,26 @@ def create_app(settings_override=None):
     :return: Flask app
     """
     app = Flask(__name__, instance_relative_config=True)
+    app.config.from_object('config.settings')
 
     if settings_override:
         app.config.update(settings_override)
 
-    @app.errorhandler(Exception)
-    def handle_error(e):
-        code = 500
-        if isinstance(e, HTTPException):
-            code = e.code
-        return jsonify(error=str(e)), code
-
-    for ex in default_exceptions:
-        app.register_error_handler(ex, handle_error)
-
-    SQLALCHEMY_DATABASE_URI = Path(os.getenv('SQLALCHEMY_DATABASE_URI')).expanduser().resolve().as_posix()
-    SQLALCHEMY_DATABASE_URI = f'sqlite:///{SQLALCHEMY_DATABASE_URI}'
-    print(SQLALCHEMY_DATABASE_URI)
-    app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS')
-    app.config['BUNDLE_ERRORS'] = os.getenv('BUNDLE_ERRORS')
-    app.config['DEBUG'] = True
     extensions(app)
+
+    if app.debug:
+        print('!!! Debug mode !!!')
+        app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
+    else:
+        @app.errorhandler(Exception)
+        def handle_error(e):
+            code = 500
+            if isinstance(e, HTTPException):
+                code = e.code
+            return jsonify(error=str(e)), code
+
+        for exc in default_exceptions:
+            app.register_error_handler(exc, handle_error)
 
     return app
 

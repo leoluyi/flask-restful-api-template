@@ -1,14 +1,17 @@
 FROM python:3.7-slim
-MAINTAINER Leo Lu <leo0650@gmail.com>
+LABEL maintainer="Leo Lu <leo0650@gmail.com>"
 
-ENV INSTALL_PATH /my_app
-RUN mkdir -p $INSTALL_PATH
-
-WORKDIR $INSTALL_PATH
+WORKDIR /flask
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
+ARG FLASK_ENV="production"
+ENV FLASK_ENV="${FLASK_ENV}" \
+    PYTHONUNBUFFERED="true"
+
 COPY . .
 
-CMD gunicorn -b 0.0.0.0:8000 --access-logfile - "snakeeyes.app:create_app()"
+EXPOSE 8000
+
+CMD ["gunicorn", "-c", "python:config.gunicorn", "myapp.app:create_app()"]

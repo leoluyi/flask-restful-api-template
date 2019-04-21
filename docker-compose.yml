@@ -1,8 +1,11 @@
-version: '2'
+version: "3.4"
 
 services:
-  website:
-    build: .
+  web:
+    build:
+        context: "."
+        args:
+            - "FLASK_ENV=${FLASK_ENV:-production}"
     command: >
       gunicorn -b 0.0.0.0:8000
         --access-logfile -

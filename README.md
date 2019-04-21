@@ -1,9 +1,10 @@
 # REST APIs with Flask and Python
 
-## Get started
+## Getting started
 
 1. `pipenv install && pipenv shell`
-2. Run following commands for db migration:
+2. `cp .env.example .env`
+3. Run following commands for db migration:
 
     ```bash
     $ export FLASK_APP="myapp.flasky"
@@ -12,8 +13,8 @@
     $ flask db upgrade
     ```
 
-3. Start server by running `./init.sh`
-4. Check http://0.0.0.0:5000/api/student/John
+4. Start server by running `./init.sh`
+5. Check http://localhost:5000/api/student/John
 
 ## Details
 

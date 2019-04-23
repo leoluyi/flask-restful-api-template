@@ -1,7 +1,7 @@
 FROM python:3.7-slim
 LABEL maintainer="Leo Lu <leo0650@gmail.com>"
 
-WORKDIR /flask
+WORKDIR /app
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
@@ -12,6 +12,6 @@ ENV FLASK_ENV="${FLASK_ENV}" \
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 5000
 
 CMD ["gunicorn", "-c", "python:config.gunicorn", "myapp.app:create_app()"]

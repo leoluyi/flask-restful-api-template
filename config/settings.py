@@ -3,8 +3,8 @@ from pathlib import Path
 import os
 
 SECRET_KEY = os.getenv('SECRET_KEY', None)
-SERVER_NAME = os.getenv('SERVER_NAME',
-                        f'localhost:{os.getenv("DOCKER_WEB_PORT", "5000")}')
+# SERVER_NAME = os.getenv('SERVER_NAME',
+#                         f'localhost:{os.getenv("DOCKER_WEB_PORT", "5000")}')
 BUNDLE_ERRORS = bool(strtobool(os.getenv('BUNDLE_ERRORS')))
 
 # DB and SQLAlchemy

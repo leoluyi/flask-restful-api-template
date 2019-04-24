@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 export FLASK_APP="myapp.flasky"
-flask db init
-flask db migrate
-flask db upgrade
+pipenv run flask db init
+pipenv run flask db migrate
+pipenv run flask db upgrade

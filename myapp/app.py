@@ -24,12 +24,11 @@ def create_app(settings_override=None):
         app.config.update(settings_override)
 
     extensions(app)
+    jsonify_error_handler(app)
 
     if app.debug:
         print('!!! Debug mode !!!')
         app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
-    else:
-        jsonify_error_handler(app)
 
     return app
 

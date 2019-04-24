@@ -2,6 +2,15 @@
 
 ## Getting started
 
+**With [Docker Compose](https://docs.docker.com/compose/install/):**
+
+```sh
+cp .env.example .env
+docker-compose up --build
+```
+
+**With [Pipenv](https://github.com/pypa/pipenv):**
+
 1. `pipenv install && pipenv shell`
 2. `cp .env.example .env`
 3. Run following commands for db migration:
@@ -91,3 +100,4 @@ GET http://127.0.0.1:5000/api/users?limit=1&offset=1
 - [REST APIs with Flask and Python](https://youtu.be/rHA5h9Gu7WI)
 - https://github.com/tomasrasymas/flask-restful-api-template
 - [Migrating from Flask-Script to the New Flask CLI](https://blog.miguelgrinberg.com/post/migrating-from-flask-script-to-the-new-flask-cli)
+- [Enabling the Flask Interactive Debugger in Development with gunicorn](https://nickjanetakis.com/blog/enabling-the-flask-interactive-debugger-in-development-with-gunicorn)

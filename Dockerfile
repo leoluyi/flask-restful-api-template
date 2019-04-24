@@ -10,8 +10,12 @@ ARG FLASK_ENV="production"
 ENV FLASK_ENV="${FLASK_ENV}" \
     PYTHONUNBUFFERED="true"
 
+# Copy App files
 COPY . .
+RUN chmod +x ./docker-entrypoint.sh
 
+# Make port 5000 available to the world outside this container
 EXPOSE 5000
 
-CMD ["gunicorn", "-c", "python:config.gunicorn", "myapp.app:create_app()"]
+# Run the app when the container launches
+CMD ["./docker-entrypoint.sh"]

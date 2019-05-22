@@ -4,26 +4,22 @@
 
 **With [Docker Compose](https://docs.docker.com/compose/install/):**
 
-```sh
+```bash
 cp .env.example .env
 docker-compose up --build
 ```
 
 **With [Pipenv](https://github.com/pypa/pipenv):**
 
-1. `pipenv install && pipenv shell`
-2. `cp .env.example .env`
-3. Run following commands for db migration:
+```bash
+pipenv install && pipenv shell
+cp .env.example .env
 
-    ```bash
-    $ export FLASK_APP="myapp.flasky"
-    $ flask db init
-    $ flask db migrate
-    $ flask db upgrade
-    ```
+# Start server
+./init.sh
+```
 
-4. Start server by running `./init.sh`
-5. Check http://localhost:5000/api/student/John
+Check http://localhost:5000/api/student/John
 
 ## Details
 

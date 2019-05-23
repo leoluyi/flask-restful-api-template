@@ -5,12 +5,12 @@ The flask command is implemented using Click.
 References
 
 - [Flask CLI - Custom Commands](https://flask.palletsprojects.com/en/1.1.x/cli/#custom-commands)
-- https://blog.miguelgrinberg.com/post/migrating-from-flask-script-to-the-new-flask-cli
+- [Migrating from Flask-Script to the New Flask CLI](https://blog.miguelgrinberg.com/post/migrating-from-flask-script-to-the-new-flask-cli)
 - https://github.com/miguelgrinberg/flasky/blob/master/flasky.py
 """
 
-# from app.models import User, Follow, Role, Permission, Post, Comment
 from .app import create_app, db
+# from app.models import User, Follow, Role, Permission, Post, Comment
 from flask_migrate import Migrate
 import click
 import os

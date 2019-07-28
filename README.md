@@ -67,7 +67,7 @@ POST http://127.0.0.1:5000/api/users
 
 Content
 
-```
+```json
 {
     "name": "John John"
 }
@@ -75,7 +75,7 @@ Content
 
 PUT http://127.0.0.1:5000/api/users/1
 
-```
+```json
 {
     "name": "Smith Smith"
 }

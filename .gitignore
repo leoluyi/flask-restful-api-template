@@ -1,3 +1,5 @@
+# App ignores.
+celerybeat*
 db_data/myapp.db
 migrations/
 

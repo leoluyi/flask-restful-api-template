@@ -8,7 +8,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', None)
 #                         f'localhost:{os.getenv("DOCKER_WEB_PORT", "5000")}')
 
 # DB and SQLAlchemy.
-_ = Path(os.getenv('SQLALCHEMY_DATABASE_URI')).expanduser().resolve().as_posix()
+_ = Path(os.getenv('SQLITE_PATH')).expanduser().resolve().as_posix()
 SQLALCHEMY_DATABASE_URI = f'sqlite:///{_}'
 print(f'(SQLite URI) {SQLALCHEMY_DATABASE_URI}')
 

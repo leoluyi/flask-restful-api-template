@@ -6,7 +6,7 @@ services:
       context: "."
       args:
         - "FLASK_ENV=${FLASK_ENV:-production}"
-    env_file: ".docker.env"
+    env_file: ".env"
     healthcheck:
       test: "${DOCKER_HEALTHCHECK_TEST:-curl localhost:5000/healthy}"
       interval: "60s"

@@ -93,7 +93,8 @@ GET http://127.0.0.1:5000/api/users?limit=1&offset=1
 
 ## References
 
-- [REST APIs with Flask and Python](https://youtu.be/rHA5h9Gu7WI)
-- https://github.com/tomasrasymas/flask-restful-api-template
+- [nickjj - build-a-saas-app-with-flask](https://github.com/nickjj/build-a-saas-app-with-flask)
+- [Video - REST APIs with Flask and Python](https://youtu.be/rHA5h9Gu7WI)
+- [tomasrasymas - flask-restful-api-templa](https://github.com/tomasrasymas/flask-restful-api-template)
 - [miguelgrinberg - Migrating from Flask-Script to the New Flask CLI](https://blog.miguelgrinberg.com/post/migrating-from-flask-script-to-the-new-flask-cli)
 - [Enabling the Flask Interactive Debugger in Development with gunicorn](https://nickjanetakis.com/blog/enabling-the-flask-interactive-debugger-in-development-with-gunicorn)

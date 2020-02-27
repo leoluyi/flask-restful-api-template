@@ -18,7 +18,7 @@ def create_app(settings_override=None):
     :return: Flask app
     """
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_object('config.settings')
+    app.config.from_object("config.settings")
 
     if settings_override:
         app.config.update(settings_override)
@@ -27,7 +27,7 @@ def create_app(settings_override=None):
     jsonify_error_handler(app)
 
     if app.debug:
-        print('!!! Debug mode !!!')
+        print("!!! Debug mode !!!")
         app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)
 
     return app
@@ -45,10 +45,10 @@ def extensions(app):
     db.init_app(app)
 
     # API
-    api.prefix = '/api'
-    api.add_resource(StudentsResource, '/student/<string:name>')
-    api.add_resource(UsersResource, '/users', '/users/<int:user_id>')
-    api.add_resource(TodosResource, '/todos', '/todos/<int:todo_id>')
+    api.prefix = "/api"
+    api.add_resource(StudentsResource, "/student/<string:name>")
+    api.add_resource(UsersResource, "/users", "/users/<int:user_id>")
+    api.add_resource(TodosResource, "/todos", "/todos/<int:todo_id>")
     api.init_app(app)
 
     return None

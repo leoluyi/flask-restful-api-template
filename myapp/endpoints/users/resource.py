@@ -3,21 +3,28 @@ from flask_restful import fields, marshal_with, marshal
 from flask_restful import Resource, reqparse, request
 
 user_fields = {
-    'id': fields.Integer,
-    'name': fields.String,
-    'todos': fields.List(fields.Nested({'id': fields.Integer,
-                                        'name': fields.String,
-                                        'description': fields.String})),
+    "id": fields.Integer,
+    "name": fields.String,
+    "todos": fields.List(
+        fields.Nested(
+            {"id": fields.Integer, "name": fields.String, "description": fields.String}
+        )
+    ),
 }
 
 user_list_fields = {
-    'count': fields.Integer,
-    'users': fields.List(fields.Nested(user_fields)),
+    "count": fields.Integer,
+    "users": fields.List(fields.Nested(user_fields)),
 }
 
 user_post_parser = reqparse.RequestParser()
-user_post_parser.add_argument('name', type=str, required=True, location=['json'],
-                              help='name parameter is required')
+user_post_parser.add_argument(
+    "name",
+    type=str,
+    required=True,
+    location=["json"],
+    help="name parameter is required",
+)
 
 
 class UsersResource(Resource):
@@ -27,11 +34,11 @@ class UsersResource(Resource):
             return marshal(user, user_fields)
         else:
             args = request.args.to_dict()
-            limit = args.get('limit', 0)
-            offset = args.get('offset', 0)
+            limit = args.get("limit", 0)
+            offset = args.get("offset", 0)
 
-            args.pop('limit', None)
-            args.pop('offset', None)
+            args.pop("limit", None)
+            args.pop("offset", None)
 
             user = User.query.filter_by(**args).order_by(User.id)
             if limit:
@@ -42,10 +49,10 @@ class UsersResource(Resource):
 
             user = user.all()
 
-            return marshal({
-                'count': len(user),
-                'users': [marshal(u, user_fields) for u in user]
-            }, user_list_fields)
+            return marshal(
+                {"count": len(user), "users": [marshal(u, user_fields) for u in user]},
+                user_list_fields,
+            )
 
     @marshal_with(user_fields)
     def post(self):
@@ -62,8 +69,8 @@ class UsersResource(Resource):
     def put(self, user_id=None):
         user = User.query.get(user_id)
 
-        if 'name' in request.json:
-            user.name = request.json['name']
+        if "name" in request.json:
+            user.name = request.json["name"]
 
         db.session.commit()
         return user

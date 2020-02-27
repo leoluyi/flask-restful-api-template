@@ -10,12 +10,13 @@ References
 """
 
 from .app import create_app, db
+
 # from app.models import User, Follow, Role, Permission, Post, Comment
 from flask_migrate import Migrate
 import click
 import os
 
-app = create_app(os.getenv('FLASK_CONFIG'))
+app = create_app(os.getenv("FLASK_CONFIG"))
 migrate = Migrate(app, db)
 
 
@@ -25,7 +26,7 @@ def make_shell_context():
 
 
 @app.cli.command()
-@click.option('--coverage/--no-coverage', default=False, help='aaa')
+@click.option("--coverage/--no-coverage", default=False, help="aaa")
 def test(coverage=False):
     "Test coverage"
     # ...
@@ -33,8 +34,8 @@ def test(coverage=False):
 
 
 @app.cli.command()
-@click.option('--length', default=25, help='Profile stack length')
-@click.option('--profile-dir', default=None, help='Profile directory')
+@click.option("--length", default=25, help="Profile stack length")
+@click.option("--profile-dir", default=None, help="Profile directory")
 def profile(length, profile_dir):
     """Start the application under the code profiler."""
     # ...

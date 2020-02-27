@@ -6,4 +6,4 @@ class StudentsResource(Resource):
     """docstring for Student"""
 
     def get(self, name):
-        return jsonify({'student': name})
+        return jsonify({"student": name})
